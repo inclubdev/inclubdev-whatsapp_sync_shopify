@@ -3,3 +3,8 @@ node_modules
 /.cache
 /build
 .env
+
+/logs
+/.wwebjs_auth
+/.wwebjs_cache
+/prisma/dev.db

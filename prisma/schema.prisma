@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Shop {
+  id          Int    @id @default(autoincrement())
+  apiKey      String
+  accessToken String
+  shopName    String @unique
+  chats       Chat[]
+}
+
+model Chat {
+  id           Int     @id @default(autoincrement())
+  chatId       String  @unique
+  shopId       Int
+  lastSkuFound String?
+  shop         Shop    @relation(fields: [shopId], references: [id])
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  sku         String    @unique
+  name        String
+  price       Float
+  categories  String
+  sizes       String
+  description String
+  synced_at   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  images   Image[]
+  variants ProductVariant[]
+}
+
+model ProductVariant {
+  id          Int     @id @default(autoincrement())
+  priceLevel  String // Nivel de precio (Ejemplo: "1", "2")
+  price       Float // Precio de la variante
+  minQuantity Int // Cantidad mínima
+  maxQuantity Int // Cantidad máxima
+  productId   Int // Relación con Product
+  product     Product @relation(fields: [productId], references: [id])
+}
+
+model Image {
+  id        Int     @id @default(autoincrement())
+  mimetype  String
+  data      String
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+}

@@ -1,6 +1,4 @@
-# Welcome to Remix!
-
-- 📖 [Remix docs](https://remix.run/docs)
+# Whatsapp Project to sync with Shopify
 
 ## Development
 
@@ -26,15 +24,17 @@ npm start
 
 Now you'll need to pick a host to deploy it to.
 
-### DIY
+## Get Shopify Credentials and setup process
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+You will need to go to any store that you want to sync with your Whatsapp products.
+Once in the admin of that store, navigate to [https://admin.shopify.com/store/your-store/settings/apps/development](https://admin.shopify.com/store/your-store/settings/apps/development) and create an app.
 
-Make sure to deploy the output of `npm run build`
+You must grant these scopes to the app: `write_products` and `write_discounts`.
 
-- `build/server`
-- `build/client`
+Now, in the Whatsapp project, once you're logged (after scanning the QR) the project will show you three fields that must be filled to have the app working, the fields will be filled with the data that you are going to find in the `API credentials` tab, in the app configuration:
 
-## Styling
+- Shopify API Key
+- Shopify Admin Access Token Key
+- Shopify Store URL (I.E. my-test-store.myshopify.com)
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+Now save the changes and start selecting the chats that you want to observe for the products!
